@@ -1,27 +1,28 @@
 const preguntasDesafio = {
-    1: { p: "¿Cuál es la forma correcta de mostrar un mensaje en Python? (Tema: print)", o: ['print("Hola")', 'print Hola', 'echo("Hola")'], r: 0 },
-    2: { p: "Queremos guardar el nombre del usuario desde el teclado. ¿Qué código usamos? (Tema: input)", o: ['nombre = read()', 'nombre = input("Dime tu nombre: ")', 'input = nombre'], r: 1 },
-    3: { p: "Si queremos comprobar si una persona es mayor de edad Y tiene boleto, ¿qué operador lógico usamos? (Tema: Operadores Lógicos)", o: ['and', 'or', 'not'], r: 0 },
-    4: { p: "¿Cómo se escribe correctamente una condición en Python? (Tema: Condicionales)", o: ['if x == 5 then:', 'if x = 5:', 'if x == 5:'], r: 2 },
-    5: { p: "¿Qué palabra clave se usa en un 'if' si la primera condición fue falsa y queremos evaluar otra? (Tema: Condicionales)", o: ['else if', 'elif', 'elseif'], r: 1 },
-    6: { p: "Queremos que un bucle 'while' se ejecute para siempre de forma infinita. ¿Cómo lo escribimos? (Tema: while)", o: ['while True:', 'while siempre:', 'while loop:'], r: 0 },
-    7: { p: "¿Qué le falta a este bucle para que no tenga un error de sintaxis?\nx = 1\nwhile x < 5\n    print(x) (Tema: while)", o: ['Los paréntesis () en la condición', 'Dos puntos (:) al final de la línea del while', 'Cambiar x por una variable local'], r: 1 },
-    8: { p: "¿Cuántas veces se imprimirá la palabra 'Python' en este bucle?\nfor i in range(3):\n    print(\"Python\") (Tema: for)", o: ['2 veces', '3 veces', '4 veces'], r: 1 },
-    9: { p: "¿Cuál es la estructura correcta para recorrer una lista llamada 'colores'? (Tema: for)", o: ['for color in colores:', 'for each color in colores:', 'for i = 1 to colores:'], r: 0 },
-    10: { p: "Si una variable 'tiene_llave = False', ¿qué devolverá la expresión 'not tiene_llave'? (Tema: Operadores Lógicos)", o: ['True', 'False', 'None'], r: 0 },
-    11: { p: "Al usar input(), ¿en qué formato o tipo de dato recibe Python la respuesta del alumno por defecto? (Tema: input)", o: ['Número entero (int)', 'Texto / Cadena (str)', 'Booleano (bool)'], r: 1 },
-    12: { p: "¿Qué error tiene esta línea de código?\nprint(\"Me encanta Python') (Tema: print)", o: ['Las comillas no coinciden (abre doble y cierra simple)', 'Le falta un punto y coma al final', 'La palabra print debe ir en mayúsculas'], r: 0 }
+    1: { p: "¿Qué comando usamos para mostrar un texto en la pantalla?\n(Tema: print)", o: ['print("Hola")', 'mostrar("Hola")', 'escribir "Hola"'], r: 0 },
+    2: { p: "¿Qué usamos para pedirle al usuario que escriba un dato desde el teclado?\n(Tema: input)", o: ['input()', 'read()', 'get()'], r: 0 },
+    3: { p: "Si queremos que dos condiciones se cumplan al mismo tiempo, ¿qué operador lógico usamos?\n(Tema: Operadores Lógicos)", o: ['or', 'and', 'not'], r: 1 },
+    4: { p: "¿Cuál es el símbolo correcto para ver si dos variables son exactamente iguales?\n(Tema: Condicionales)", o: ['=', '==', '==='], r: 1 },
+    5: { p: "En una condición, si el 'if' es falso, ¿qué palabra evalúa una segunda opción?\n(Tema: Condicionales)", o: ['else', 'elif', 'otherwise'], r: 1 },
+    6: { p: "¿Qué tipo de bucle se ejecuta MIENTRAS una condición sea verdadera?\n(Tema: while)", o: ['for', 'repeat', 'while'], r: 2 },
+    7: { p: "Si un bucle tiene la condición 'while True:', ¿cuántas veces se repetirá?\n(Tema: while)", o: ['Ninguna', 'Para siempre (infinito)', 'Solo 10 veces'], r: 1 },
+    8: { p: "¿Qué función nos ayuda a crear una lista de números en un bucle for?\nEj: for i in ...(5):\n(Tema: for)", o: ['range()', 'list()', 'numbers()'], r: 0 },
+    9: { p: "¿Cuál de estos bucles repetirá el código exactamente 3 veces?\n(Tema: for)", o: ['for i in range(3):', 'for i in range(1, 3):', 'while x < 3:'], r: 0 },
+    10: { p: "Si una variable 'es_fin_de_semana = False', ¿qué dará la expresión 'not es_fin_de_semana'?\n(Tema: Operadores Lógicos)", o: ['True', 'False', 'None'], r: 0 },
+    11: { p: "¿Qué carácter obligatorio se pone al final de la línea del 'if' o del 'while'?\n(Tema: Condicionales)", o: ['; (punto y coma)', '. (punto)', ': (dos puntos)'], r: 2 },
+    12: { p: "Al usar input(), ¿qué tipo de dato entrega Python por defecto?\n(Tema: input)", o: ['Texto (str)', 'Número entero (int)', 'Booleano (bool)'], r: 0 }
 };
 
 let posicionActual = 0;
-const metaCasilla = 13; // Casilla 13 es la meta final
+const metaCasilla = 12; // Casilla 12 es la meta final
 let pasosPendientes = 0;
+let respuestasBuenas = 0; // Conteo de aciertos
+let intentosFallidos = 0; // Conteo de oportunidades por pregunta
 
 function inicializarTablero() {
     const contenedor = document.getElementById("tablero");
     contenedor.innerHTML = "";
     
-    // Generar casillas del 12 al 0 de forma descendente en pantalla
     for (let i = 12; i >= 0; i--) {
         const div = document.createElement("div");
         div.className = "casilla";
@@ -60,10 +61,11 @@ function lanzarDado() {
     const resultado = document.getElementById("resultado-dado");
     
     botonDado.disabled = true;
+    intentosFallidos = 0; // Resetear intentos al lanzar el dado
     
     let giros = 0;
     const intervalo = setInterval(() => {
-        resultado.innerText = Math.floor(Math.random() * 3) + 1; // Dados del 1 al 3 para controlar el ritmo de avance
+        resultado.innerText = Math.floor(Math.random() * 3) + 1; 
         giros++;
         if (giros > 8) {
             clearInterval(intervalo);
@@ -79,6 +81,7 @@ function procesarMovimiento() {
     if (posicionActual >= 12) {
         posicionActual = 12;
         actualizarPosicionVisual();
+        document.getElementById("total-buenas").innerText = respuestasBuenas;
         document.getElementById("modal-victoria").style.display = "flex";
         return;
     }
@@ -109,27 +112,47 @@ function cargarDesafio(casilla) {
 
 function evaluarRespuesta(seleccionada, correcta) {
     const feedback = document.getElementById("feedback-desafio");
-    document.getElementById("opciones-contenedor").innerHTML = "";
-
+    
     if (seleccionada === correcta) {
+        // Respuesta correcta
+        document.getElementById("opciones-contenedor").innerHTML = "";
         feedback.className = "correcto";
-        feedback.innerText = "✅ ¡Excelente! Código compilado sin errores. Puedes volver a lanzar el dado.";
+        feedback.innerText = "✅ ¡Excelente! Código sin errores. ¡Tira el dado para continuar!";
+        
+        respuestasBuenas++;
+        document.getElementById("contador-buenas").innerText = respuestasBuenas;
         document.getElementById("btn-dado").disabled = false;
     } else {
-        feedback.className = "incorrecto";
-        feedback.innerText = "❌ IndentationError / SyntaxError... Tu script falló y retrocedes 1 línea.";
-        setTimeout(() => {
-            if (posicionActual > 0) posicionActual--;
-            actualizarPosicionVisual();
+        // Respuesta incorrecta
+        intentosFallidos++;
+        
+        if (intentosFallidos === 1) {
+            // Primera oportunidad fallada
+            feedback.className = "incorrecto";
+            feedback.innerText = "❌ ¡SyntaxError! Tienes una segunda oportunidad. ¡Intenta con otra opción!";
+            
+            // Desactivar solo el botón que presionó mal para guiarlo
+            const botones = document.getElementsByClassName("btn-opcion");
+            if (botones[seleccionada]) {
+                botones[seleccionada].disabled = true;
+                botones[seleccionada].style.backgroundColor = "#475569";
+                botones[seleccionada].style.cursor = "not-allowed";
+            }
+        } else {
+            // Segunda oportunidad fallada
+            document.getElementById("opciones-contenedor").innerHTML = "";
+            feedback.className = "incorrecto";
+            feedback.innerText = "❌ Bug persistente... Misión bloqueada. Vuelve a lanzar el dado para seguir avanzando.";
             document.getElementById("btn-dado").disabled = false;
-            document.getElementById("texto-desafio").innerText = "¡Lanza el dado para intentar procesar tu código de nuevo!";
-            feedback.innerText = "";
-        }, 2500);
+        }
     }
 }
 
 function reiniciarJuego() {
     posicionActual = 0;
+    respuestasBuenas = 0;
+    intentosFallidos = 0;
+    document.getElementById("contador-buenas").innerText = respuestasBuenas;
     document.getElementById("modal-victoria").style.display = "none";
     document.getElementById("btn-dado").disabled = false;
     document.getElementById("resultado-dado").innerText = "-";
