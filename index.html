@@ -31,9 +31,11 @@
 
         <!-- Panel Derecho: El Tablero de la Serpiente -->
         <div class="tablero-seccion">
-            <div class="marcador-posicion">📍 Línea de Código Actual: <span id="posicion-texto">0</span> / 12</div>
+            <div class="marcador-posicion">📍 Línea Actual: <span id="posicion-texto">0</span> / 12</div>
+            <!-- NUEVO: Contador de respuestas buenas -->
+            <div class="marcador-buenas">✅ Respuestas Buenas: <span id="contador-buenas">0</span></div>
             <div class="tablero-grid" id="tablero">
-                <!-- Las 12 casillas se generan dinámicamente aquí -->
+                <!-- Las casillas se generan dinámicamente aquí -->
             </div>
         </div>
     </div>
@@ -43,6 +45,7 @@
         <div class="modal-content">
             <h2>🏆 ¡Master Python Developer!</h2>
             <p>Has corregido todos los SyntaxError y tu programa se ejecutó al 100% con éxito.</p>
+            <p>Lograste un total de <span id="total-buenas">0</span> respuestas correctas. ⭐</p>
             <button onclick="reiniciarJuego()">🔄 Volver a Correr</button>
         </div>
     </div>
