@@ -1,0 +1,98 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0f172a;
+    color: #f8fafc;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+header { text-align: center; margin-bottom: 20px; }
+h1 { color: #ffd43b; margin: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+
+.game-layout {
+    display: flex;
+    gap: 30px;
+    max-width: 950px;
+    width: 100%;
+    align-items: flex-start;
+}
+
+/* Panel de controles */
+.panel-control {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.dado-seccion {
+    background-color: #1e293b;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+    text-align: center;
+}
+#btn-dado {
+    background-color: #306998;
+    color: white; border: none; font-size: 18px; font-weight: bold;
+    padding: 12px 25px; border-radius: 6px; cursor: pointer; width: 100%;
+    transition: 0.2s;
+}
+#btn-dado:hover { background-color: #4b8bbe; }
+#btn-dado:disabled { background-color: #475569; cursor: not-allowed; }
+#resultado-dado {
+    font-size: 40px; margin-top: 10px; font-weight: bold; color: #ffd43b;
+}
+
+.desafio-box {
+    background-color: #1e293b; padding: 20px; border-radius: 8px;
+    border: 1px solid #334155; min-height: 250px;
+}
+.desafio-title { font-weight: bold; color: #38bdf8; margin-bottom: 10px; font-family: monospace; }
+#texto-desafio { font-family: monospace; white-space: pre-wrap; background: #0f172a; padding: 10px; border-radius: 4px; border: 1px solid #1e293b; }
+.btn-opcion {
+    background-color: #334155; color: white; border: 1px solid #475569;
+    padding: 10px; width: 100%; text-align: left; margin-bottom: 8px;
+    border-radius: 4px; cursor: pointer; font-family: monospace;
+}
+.btn-opcion:hover { background-color: #475569; }
+#feedback-desafio { font-weight: bold; margin-top: 10px; }
+.correcto { color: #4ade80; }
+.incorrecto { color: #f87171; }
+
+/* Tablero de juego */
+.tablero-seccion {
+    flex: 1.2;
+    background-color: #1e293b; padding: 20px; border-radius: 8px;
+    border: 1px solid #334155;
+}
+.marcador-posicion { font-size: 18px; font-weight: bold; margin-bottom: 15px; }
+.tablero-grid {
+    display: flex; flex-direction: column; gap: 8px;
+}
+.casilla {
+    background-color: #0f172a; border: 2px solid #334155; border-radius: 6px;
+    padding: 12px; font-size: 14px; font-family: monospace; display: flex;
+    justify-content: space-between; align-items: center; position: relative;
+}
+.casilla.activa { border-color: #ffd43b; background-color: #1e293b; }
+.casilla.meta { background-color: #14532d; border-color: #22c55e; }
+.token-noob {
+    background-color: #ffd43b; color: #0f172a; padding: 2px 8px;
+    border-radius: 12px; font-size: 11px; font-weight: bold;
+}
+
+/* Modal */
+.modal {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(15, 23, 42, 0.9); justify-content: center; align-items: center;
+}
+.modal-content {
+    background-color: #1e293b; padding: 30px; border-radius: 12px;
+    text-align: center; border: 2px solid #ffd43b;
+}
+.modal-content button {
+    background-color: #4ade80; border: none; padding: 12px 25px;
+    font-weight: bold; border-radius: 6px; cursor: pointer; margin-top: 15px;
+}

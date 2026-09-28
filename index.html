@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Racing - Carrera de Dados</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>🐍 Python Basic Racing</h1>
+        <p>¡Lanza el dado, avanza por las casillas de código y corrige los bugs de Python para llegar a la meta!</p>
+    </header>
+
+    <div class="game-layout">
+        <!-- Panel Izquierdo: Control del Dado y Desafíos de Python -->
+        <div class="panel-control">
+            <div class="dado-seccion">
+                <button id="btn-dado" onclick="lanzarDado()">🎲 Lanzar Dado</button>
+                <div id="resultado-dado">-</div>
+            </div>
+            
+            <div class="desafio-box" id="caja-desafio">
+                <div class="desafio-title">💻 Consola Python (Debugger)</div>
+                <p id="texto-desafio">¡Lanza el dado para compilar tu primer script!</p>
+                <div id="opciones-contenedor"></div>
+                <div id="feedback-desafio"></div>
+            </div>
+        </div>
+
+        <!-- Panel Derecho: El Tablero de la Serpiente -->
+        <div class="tablero-seccion">
+            <div class="marcador-posicion">📍 Línea de Código Actual: <span id="posicion-texto">0</span> / 12</div>
+            <div class="tablero-grid" id="tablero">
+                <!-- Las 12 casillas se generan dinámicamente aquí -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Pantalla de Victoria -->
+    <div id="modal-victoria" class="modal">
+        <div class="modal-content">
+            <h2>🏆 ¡Master Python Developer!</h2>
+            <p>Has corregido todos los SyntaxError y tu programa se ejecutó al 100% con éxito.</p>
+            <button onclick="reiniciarJuego()">🔄 Volver a Correr</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
